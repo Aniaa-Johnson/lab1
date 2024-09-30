@@ -11,7 +11,19 @@
  * 
  */
 char* readString(char* fileName){
-    //TODO: Replace this line with your code
+    FILE* file = fopen(fileName,"r");
+    if (file== NULL) {
+        fprintf(stderr, "no file found");
+    }
+
+    char* str = (char*) malloc(MAX_LINE_LEN *sizeof(char));
+    if (str != NULL) {
+        fgets(str,MAX_LINE_LEN,file);
+        fclose(file);
+} else {
+    free(str);
+}
+     return str;
 }
 
 /*
@@ -29,5 +41,15 @@ char* readString(char* fileName){
  * 
  */
 char* mysteryExplode(const char* str){
-    //TODO: Replace this line with your code
+    int length = strlen(str);
+    int explodedLength = (length*(length+1))/2 +1;
+    char* explodedString =(char*) malloc(explodedLength* sizeof(char));
+    if (explodedString==NULL){
+        fprintf(stderr, "no input found");
+    }
+    for(int i = 0; i<length;i++){
+        strncpy(explodedString,str,i);
+        fprintf("%s", explodedString);
+    }
+    return explodedString;
 }
